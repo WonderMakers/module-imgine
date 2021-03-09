@@ -1,6 +1,6 @@
 {
-  "name": "Imgine",
-  "version": "1.0.0",
+  "name": "imgine",
+  "version": "1.0.1",
   "description": "Generate & convert images",
   "repository": {
     "type": "git",
