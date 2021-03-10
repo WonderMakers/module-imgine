@@ -1,11 +1,12 @@
 {
   "name": "imgine",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Generate & convert images",
   "repository": {
     "type": "git",
     "url": "https://git.hzberg.com/modules/imgine"
   },
+  "main": "dist/nuxt.imagine.module.js",
   "scripts": {
     "test": "mocha --require esm",
     "lib-node-converter": "webpack --config ./src/node-converter/webpack.config.js",
