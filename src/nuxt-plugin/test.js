@@ -6,7 +6,7 @@ describe('#nuxt-plugin', function () {
 
   const pluginProd = new Plugin.ImaginePlugin({
     namespace: 'imgine.space',
-    endpoint: 'https://imgine.space/c/v1/',
+    endpoint: 'https://imgine.space/c/',
     staticEndpoint: 'https://host/'
   }, false)
 
@@ -26,7 +26,7 @@ describe('#nuxt-plugin', function () {
   })
 
   it('Prod format', function () {
-    expect(pluginProd.format('/test/img.jpg')).to.have.string('https://imgine.space/c/v1/https://host/test/img.jpg')
-    expect(pluginProd.format('/test/img.jpg?f=jpeg')).to.have.string('https://imgine.space/c/v1/https://host/test/img.jpg?f=jpeg')
+    expect(pluginProd.format('/test/img.jpg')).to.have.string('https://imgine.space/c/https://host/test/img.jpg')
+    expect(pluginProd.format('/test/img.jpg?f=jpeg')).to.have.string('https://imgine.space/c/https://host/test/img.jpg?f=jpeg')
   })
 });
