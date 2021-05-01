@@ -44,3 +44,9 @@
         // Quality (optional) 
         q: [Number]
     })
+    
+# Server
+ 
+    ssh root@95.216.192.206
+    docker exec -it 063f16d14fcb bash
+    docker system prune -a
