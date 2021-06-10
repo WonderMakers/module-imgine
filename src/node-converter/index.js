@@ -1,71 +1,71 @@
 const fetch = require('node-fetch');
 const math = require('./../../utils/math');
 const optionsConfig = require('./_options.js');
+const Cache = require('../../utils/cache');
 
 module.exports = class NodeConverterImage {
   constructor (sharp, options) {
     this.options = Object.assign({}, {
       fetchCacheLimit: 100
     }, options);
-
+  
     this.sharp = sharp;
-    this.fetchCache = [];
+    this.cache = {
+      upload: new Cache(options.fetchCacheLimit),
+      sharping: new Cache(options.fetchCacheLimit)
+    };
   }
 
   async fetchResource (url) {
-    try {
-      const index = this.fetchCache.findIndex(item => item.url === url);
-      if (index > -1) {
-        return this.fetchCache[index];
-      } else {
+    const query = { url };
+    const cache = this.cache.upload.get(query);
+    
+    return cache || this.cache.upload.add(query, new Promise(async (resolve) => {
+      try {
         const result = await fetch.default(url);
         const buffer = await result.buffer();
-        const resource = {buffer, url};
-        this.fetchCache.push(resource);
-        if (this.fetchCache.length > this.options.fetchCacheLimit) {
-          cache.splice(0, this.fetchCache.length - this.options.fetchCacheLimit);
-        }
-        return resource;
+        resolve({ buffer, url });
+      } catch (e) {
+        resolve(null);
+        this.cache.upload.remove(query);
       }
-    } catch (e) {
-      return null;
-    }
+    }));
+  }
+  
+  sharping (file, _options) {
+    const options = this.makeConvertingOptions(_options);
+    const query = { url: file.url, ...options };
+    const cache = this.cache.sharping.get(query);
+  
+    return cache || this.cache.sharping.add(query, new Promise(async (resolve) => {
+      const result = this.sharp(file.buffer);
+  
+      try {
+        if (options.r) {
+          result.rotate(options.r);
+        }
+        if (options.b) {
+          result.blur(options.b);
+        }
+        result.resize({ width: options.w, height: options.h });
+        result.toFormat(options.f, { quality: options.q });
+    
+        const buffer = await result.toBuffer();
+        const contentType = `image/${ options.f }`;
+        const format = options.f;
+  
+        resolve({ buffer, contentType, format });
+      } catch (e) {
+        resolve(null);
+      }
+    }));
   }
 
   async convert (url, _options = {}) {
     const file = await this.fetchResource(url);
-    const options = this.makeConvertingOptions(_options);
-
-    if (!file) {
-      return null;
-    }
-
-    const result = this.sharp(file.buffer);
-
-    try {
-      if (options.r) {
-        result.rotate(options.r);
-      }
-
-      if (options.b) {
-        result.blur(options.b);
-      }
-
-      result.resize({
-        width: options.w,
-        height: options.h
-      });
-
-      result.toFormat(options.f, { quality: options.q });
-
-      const buffer = await result.toBuffer();
-      const contentType = `image/${ options.f }`;
-      const format = options.f;
-
-      return { buffer, contentType, format };
-    } catch (e) {
-      return null;
-    }
+    return file
+      ? this.sharping(file, _options)
+      : Promise.resolve(null);
   }
 
   makeConvertingOptions (options) {
