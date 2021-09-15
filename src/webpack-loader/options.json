@@ -1,0 +1,9 @@
+{
+  "quality": 90,
+  "name": "[hash]-[width].[ext]",
+  "esModule": false,
+  "rotate": 0,
+  "blur": 0,
+  "sizes": [],
+  "formats": ["avif", "webp"]
+}

@@ -32,15 +32,16 @@ module.exports = class NodeConverterImage {
     }));
   }
   
-  sharping (file, _options) {
+  async sharping (file, _options) {
     const options = this.makeConvertingOptions(_options);
     const query = { url: file.url, ...options };
     const cache = this.cache.sharping.get(query);
   
-    return cache || this.cache.sharping.add(query, new Promise(async (resolve) => {
-      const result = this.sharp(file.buffer);
-  
+    if (cache) {
+      return cache
+    } else {
       try {
+        const result = this.sharp(file.buffer);
         if (options.r) {
           result.rotate(options.r);
         }
@@ -54,11 +55,12 @@ module.exports = class NodeConverterImage {
         const contentType = `image/${ options.f }`;
         const format = options.f;
   
-        resolve({ buffer, contentType, format });
+        return this.cache.sharping.add(query, { buffer, contentType, format });
       } catch (e) {
-        resolve(null);
+        console.log('Sharping error:', e)
+        return null;
       }
-    }));
+    }
   }
 
   async convert (url, _options = {}) {

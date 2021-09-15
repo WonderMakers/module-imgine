@@ -1,0 +1,30 @@
+{
+  "title": "Imagine Loader options",
+  "type": "object",
+  "properties": {
+    "sizes": {
+      "type": "array",
+      "items": {
+        "description": "Array of strings or numbers",
+        "anyOf": [{ "type": "string" }, { "type": "number" }
+        ]
+      }
+    },
+    "formats": {
+      "type": "array",
+      "items": {
+        "description": "Array of strings or numbers",
+        "anyOf": [{ "type": "string", "enum": ["webp", "avif", "png", "jpeg"] }]
+      }
+    },
+    "name": { "type": "string" },
+    "quality": { "anyOf": [{ "type": "string" }, { "type": "number" }] },
+    "blur": { "anyOf": [{ "type": "string" }, { "type": "number" }] },
+    "rotate": { "anyOf": [{ "type": "string" }, { "type": "number" }] },
+    "esModule": {
+      "description": "By default, imagine-loader generates JS modules that don't use the ES modules syntax.",
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": true
+}

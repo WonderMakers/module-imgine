@@ -1,6 +1,6 @@
 {
   "name": "imgine",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Generate & convert images",
   "repository": {
     "type": "git",
@@ -12,8 +12,9 @@
     "lib-node-converter": "webpack --config ./src/node-converter/webpack.config.js",
     "lib-nuxt-module": "webpack --config ./src/nuxt-module/webpack.config.js",
     "lib-nuxt-plugin": "webpack --config ./src/nuxt-plugin/webpack.config.js",
+    "lib-loader": "webpack --config ./src/webpack-loader/webpack.config.js",
     "lib-nuxt-components": "webpack --config ./src/nuxt-components/webpack.config.js",
-    "libs": "npm run lib-node-converter && npm run lib-nuxt-module && npm run lib-nuxt-plugin && npm run lib-nuxt-components",
+    "libs": "npm run lib-node-converter && npm run lib-nuxt-module && npm run lib-nuxt-plugin && npm run lib-nuxt-components && npm run lib-loader",
     "build": "npm run test && npm run libs"
   },
   "author": "",
