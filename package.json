@@ -1,6 +1,6 @@
 {
   "name": "imgine",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Generate & convert images",
   "repository": {
     "type": "git",
@@ -21,7 +21,7 @@
   "license": "ISC",
   "dependencies": {
     "object-hash": "2.2.0",
-    "sharp": "0.29.0",
+    "sharp": "0.29.1",
     "vue": "2.6.12"
   },
   "devDependencies": {
