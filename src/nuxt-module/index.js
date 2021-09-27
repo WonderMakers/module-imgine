@@ -38,7 +38,7 @@ export default function (moduleOptions = {}) {
     /* Add the new loader rule */
     config.module.rules.push({
       test: /\.(png|jpe?g|webp)$/,
-      loader: 'imgine/loader',
+      loader: 'imgine/loader'
       // options: DEFAULT_RESPONSIVE_LOADER_OPTIONS
     })
   })

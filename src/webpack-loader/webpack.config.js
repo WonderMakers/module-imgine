@@ -19,6 +19,9 @@ module.exports = {
       }
     ]
   },
+  externals: {
+    'sharp': 'commonjs sharp'
+  },
   output: {
     path: path.resolve(__dirname, '../../dist'),
     filename: 'webpack-loader.js',

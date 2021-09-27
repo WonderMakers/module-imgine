@@ -1,6 +1,6 @@
 {
   "name": "imgine",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Generate & convert images",
   "repository": {
     "type": "git",
@@ -20,9 +20,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "object-hash": "2.2.0",
-    "sharp": "0.29.1",
-    "vue": "2.6.12"
+    "object-hash": "2.2.0"
   },
   "devDependencies": {
     "@babel/core": "7.13.8",
