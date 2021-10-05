@@ -4,6 +4,6 @@
   "esModule": false,
   "rotate": 0,
   "blur": 0,
-  "sizes": [],
+  "map": [],
   "formats": ["avif", "webp"]
 }

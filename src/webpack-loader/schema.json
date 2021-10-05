@@ -2,7 +2,7 @@
   "title": "Imagine Loader options",
   "type": "object",
   "properties": {
-    "sizes": {
+    "map": {
       "type": "array",
       "items": {
         "description": "Array of strings or numbers",

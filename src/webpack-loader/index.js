@@ -19,23 +19,23 @@ module.exports = async function (content) {
     url: resourcePath,
     ext: path.extname(resourcePath).replace(/\./, '')
   }
-  
+
   if (typeof loaderCallback == 'undefined') {
     new Error('Imagine loader callback error')
     return
   }
-  
+
   // Object representation of the query string
   const parsedResourceQuery = this.resourceQuery ? parseQuery(this.resourceQuery) : {}
   // Combines defaults, webpack options and query options,
   // later sources' properties overwrite earlier ones.
   const options = Object.assign({}, DEFAULTS, getOptions(this), parsedResourceQuery)
-  options.sizes = normolizeSizes(options.sizes);
+  options.map = normalizeSizes(options.map);
   options.formats.push(file.ext);
-  options.formats = normolizeFormats(options.formats);
-  
+  options.formats = normalizeFormats(options.formats);
+
   options.formats.forEach(format => {
-    options.sizes.forEach(size => {
+    options.map.forEach(size => {
       const transformOptions = {
         w: size,
         b: options.blur,
@@ -64,7 +64,7 @@ module.exports = async function (content) {
     transformOptions: { r: options.rotate, f: file.ext }
   })
   // validate(schema, options, { name: 'Imagine Loader' })
-  
+
   Promise.all(promises).then((results) => {
     const formats = options.formats.map(format => {
       const images = results.filter(image => image.format === format)
@@ -96,10 +96,10 @@ async function generateFile ({ file, rootContext, name, transformOptions }) {
     url: file.url,
     buffer: file.url
   }, transformOptions)
-  
+
   let outputPath = path.posix.join('', fileName)
   let publicPath = `__webpack_public_path__ + ${JSON.stringify(outputPath)}`
-  
+
   if (result) {
     this.emitFile(outputPath, result.buffer, null)
     return {
@@ -116,8 +116,8 @@ function toStringImageData (imageData) {
   return `{ path: ${imageData.path}${imageData.width ? `, width: ${imageData.width}` : ''}, format: "${imageData.format}", type: "${imageData.type}" }`
 }
 
-function normolizeSizes (sizes = []) {
-  return sizes.reduce((result, size) => {
+function normalizeSizes (map = []) {
+  return map.reduce((result, size) => {
     if (!result.includes(size)) {
       result.push(size)
     }
@@ -125,7 +125,7 @@ function normolizeSizes (sizes = []) {
   }, []).sort()
 }
 
-function normolizeFormats (formats = []) {
+function normalizeFormats (formats = []) {
   const sortIndex = function (format) {
     switch (format) {
       case 'avif': return 0;
