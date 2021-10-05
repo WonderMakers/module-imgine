@@ -1,1 +1,1 @@
-module.exports = require("./resources/img3.jpg?{map:[177, 354, 531]}");
+module.exports = require("./resources/img2.jpg?{map:[177, 354, 531]}");
