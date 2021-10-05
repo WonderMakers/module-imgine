@@ -122,7 +122,7 @@ function normalizeSizes (map = []) {
       result.push(size)
     }
     return result
-  }, []).sort()
+  }, []).sort((a, b) => (a - b))
 }
 
 function normalizeFormats (formats = []) {
@@ -130,7 +130,8 @@ function normalizeFormats (formats = []) {
     switch (format) {
       case 'avif': return 0;
       case 'webp': return 1;
-      default: return 2;
+      case 'png': return 2;
+      case 'jpg': return 3;
     }
   }
   const renameFormat = function (name) {
