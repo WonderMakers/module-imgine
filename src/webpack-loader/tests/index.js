@@ -4,6 +4,14 @@ const {expect, should} = require('chai');
 
 
 describe('#webpack-loader', function () {
+  // it('Formats [default]', async () => {
+  //   // require('./resources/img1.png?{map:[744, 1488, 2233]}');
+  //   const res = await build('test2.js').catch(console.log)
+  //   const res2 = await build('test1.js').catch(console.log)
+  //
+  //   console.log('test 1', res2)
+  // })
+  
   it('Formats [default]', async () => {
     // require('./resources/img1.png?{map:[744, 1488, 2233]}');
     const res = await build('test1.js').catch(console.log)

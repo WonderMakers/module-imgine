@@ -29,11 +29,13 @@ module.exports = async function (content) {
   const parsedResourceQuery = this.resourceQuery ? parseQuery(this.resourceQuery) : {}
   // Combines defaults, webpack options and query options,
   // later sources' properties overwrite earlier ones.
-  const options = Object.assign({}, DEFAULTS, getOptions(this), parsedResourceQuery)
+  const defaultOptions = Object.assign({}, DEFAULTS)
+  defaultOptions.formats = Object.assign([], DEFAULTS.formats)
+  const options = Object.assign({}, defaultOptions, getOptions(this), parsedResourceQuery)
+  
   options.map = normalizeSizes(options.map);
   options.formats.push(file.ext);
   options.formats = normalizeFormats(options.formats);
-
   options.formats.forEach(format => {
     options.map.forEach(size => {
       const transformOptions = {

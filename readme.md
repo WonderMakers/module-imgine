@@ -1,5 +1,5 @@
 ### Install
-    npm i git+https://git.hzberg.com/modules/imgine#1.1.0
+    npm i git+https://git.hzberg.com/modules/imgine#1.1.1
     
 ### Setup
 ```nuxt.config.js```
