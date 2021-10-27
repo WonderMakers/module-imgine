@@ -4,8 +4,8 @@ const path = require('path')
 export default function (moduleOptions = {}) {
   const { nuxt } = this
   const options = Object.assign({}, defaultOptions, this.options.imgine, moduleOptions)
-  
-  if (moduleOptions.useLoader) {
+
+  if (options.useLoader) {
     this.extendBuild((config, { isClient, isServer }) => {
       const existingImageLoader = config.module.rules.find(
         rule =>
@@ -15,7 +15,7 @@ export default function (moduleOptions = {}) {
           rule.test.test('.webp') &&
           rule.test.test('.svg')
       )
-      
+
       /* If the image loader rule has been removed or edited then we cannot continue.
       ** It is not clear how to update the webpack rules.
       ** The user should define a custom webpack configuration.
@@ -30,12 +30,12 @@ export default function (moduleOptions = {}) {
           ].join('')
         )
       }
-      
+
       /* Update the loader so it's no longer respo∏nsible for png/jpg/webp files */
       if (existingImageLoader) {
         existingImageLoader.test = /\.(svg|gif)$/i
       }
-      
+
       /* Add the new loader rule */
       config.module.rules.push({
         test: /\.(png|jpe?g|webp)$/,
@@ -44,7 +44,7 @@ export default function (moduleOptions = {}) {
       })
     })
   }
-  
+
   this.addPlugin({
     src: path.resolve(__dirname, 'nuxt.imagine.plugin.js'),
     fileName: 'imagine.plugin.js',
@@ -57,7 +57,7 @@ export default function (moduleOptions = {}) {
   }
 
   const serverMiddleware = require('./server.middleware')
-  
+
   this.addServerMiddleware(
     serverMiddleware(options)
   )
