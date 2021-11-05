@@ -24,9 +24,11 @@ module.exports = class NodeConverterImage {
       return Promise.resolve(cache);
     } else {
       try {
+        console.log('fetchResource', url)
         const result = await fetch.default(url);
         const buffer = await result.buffer();
         const res = { buffer, url };
+        console.log('fetchResource success', url)
         this.cache.upload.add(query, res);
         return Promise.resolve(res);
       } catch (e) {
