@@ -8,7 +8,7 @@ module.exports = class NodeConverterImage {
     this.options = Object.assign({}, {
       fetchCacheLimit: 100
     }, options);
-  
+
     this.sharp = sharp;
     this.cache = {
       upload: new Cache(options.fetchCacheLimit),
@@ -19,24 +19,28 @@ module.exports = class NodeConverterImage {
   async fetchResource (url) {
     const query = { url };
     const cache = this.cache.upload.get(query);
-    
-    return cache || this.cache.upload.add(query, new Promise(async (resolve) => {
+
+    if (cache) {
+      return Promise.resolve(cache);
+    } else {
       try {
         const result = await fetch.default(url);
         const buffer = await result.buffer();
-        resolve({ buffer, url });
+        const res = { buffer, url };
+        this.cache.upload.add(query, res);
+        return Promise.resolve(res);
       } catch (e) {
-        resolve(null);
         this.cache.upload.remove(query);
+        return Promise.resolve(null);
       }
-    }));
+    }
   }
-  
+
   async sharping (file, _options) {
     const options = this.makeConvertingOptions(_options);
     const query = { url: file.url, ...options };
     const cache = this.cache.sharping.get(query);
-  
+
     if (cache) {
       return cache
     } else {
@@ -50,11 +54,11 @@ module.exports = class NodeConverterImage {
         }
         result.resize({ width: options.w, height: options.h });
         result.toFormat(options.f, { quality: options.q });
-    
+
         const buffer = await result.toBuffer();
         const contentType = `image/${ options.f }`;
         const format = options.f;
-  
+
         return this.cache.sharping.add(query, { buffer, contentType, format });
       } catch (e) {
         console.log('Sharping error:', e)
