@@ -6,15 +6,14 @@
     "type": "git",
     "url": "https://git.hzberg.com/modules/imgine"
   },
-  "type": "module",
   "main": "dist/nuxt.imagine.module.js",
   "scripts": {
     "test": "mocha --require esm --timeout 60000",
-    "lib-node-converter": "webpack --config ./src/node-converter/webpack.config.cjs",
-    "lib-nuxt-module": "webpack --config ./src/nuxt-module/webpack.config.cjs",
-    "lib-nuxt-plugin": "webpack --config ./src/nuxt-plugin/webpack.config.cjs",
-    "lib-loader": "webpack --config ./src/webpack-loader/webpack.config.cjs",
-    "lib-nuxt-components": "webpack --config ./src/nuxt-components/webpack.config.cjs",
+    "lib-node-converter": "webpack --config ./src/node-converter/webpack.config.js",
+    "lib-nuxt-module": "webpack --config ./src/nuxt-module/webpack.config.js",
+    "lib-nuxt-plugin": "webpack --config ./src/nuxt-plugin/webpack.config.js",
+    "lib-loader": "webpack --config ./src/webpack-loader/webpack.config.js",
+    "lib-nuxt-components": "webpack --config ./src/nuxt-components/webpack.config.js",
     "libs": "npm run lib-node-converter && npm run lib-nuxt-module && npm run lib-nuxt-plugin && npm run lib-nuxt-components && npm run lib-loader",
     "build": "npm run test && npm run libs"
   },
