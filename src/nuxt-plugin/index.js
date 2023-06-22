@@ -1,4 +1,4 @@
-import { ImaginePlugin } from './class'
+import { ImaginePlugin } from './class.js'
 
 export default ({ app }, inject) => {
   const isDev = app.context.isDev

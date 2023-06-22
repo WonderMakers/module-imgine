@@ -1,28 +1,22 @@
-.CtNh05ATED0JpmU4lJli {
-    width: 100%;
-    height: auto;
-}
-
-.XxdXwYv4rrYihfVez5Og {
+.container {
     position: relative;
 }
 
-.XxdXwYv4rrYihfVez5Og:before {
+.container:before {
     content: '';
     display: block;
     padding-bottom: var(--image-aspect);
 }
 
-.ITLse43_j7o6utluHBPi {
+.placeholder {
     z-index: 2;
 }
 
-.DQN2P29Y8pzi6uV4yMNI,
-.ITLse43_j7o6utluHBPi {
+.image,
+.placeholder {
     position: absolute;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
 }
-

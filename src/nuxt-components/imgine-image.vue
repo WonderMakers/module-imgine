@@ -24,7 +24,7 @@
   // Doc: https://medium.com/@woutervanderzee/responsive-images-with-srcset-and-sizes-fc434845e948
   // https://developer.mozilla.org/en-US/docs/Web/HTML/Element/picture
   import mixin from './imine.mixin'
-
+  import './imgine-image.module.css';
   export default {
     name: 'ImgineImage',
     mixins: [mixin],
@@ -52,10 +52,3 @@
     }
   }
 </script>
-
-<style lang="scss" module>
-  .image {
-    width: 100%;
-    height: auto;
-  }
-</style>

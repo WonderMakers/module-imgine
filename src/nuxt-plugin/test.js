@@ -1,10 +1,10 @@
-const expect = require('chai').expect;
-const Plugin = require('./class')
+import { expect } from 'chai'
+import { ImaginePlugin } from './class.js'
 
 describe('#nuxt-plugin', function () {
-  const pluginDev = new Plugin.ImaginePlugin({namespace: 'imgine.space'}, true)
+  const pluginDev = new ImaginePlugin({namespace: 'imgine.space'}, true)
 
-  const pluginProd = new Plugin.ImaginePlugin({
+  const pluginProd = new ImaginePlugin({
     namespace: 'imgine.space',
     endpoint: 'https://imgine.space/c/',
     staticEndpoint: 'https://host/'

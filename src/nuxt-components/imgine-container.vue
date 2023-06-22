@@ -16,6 +16,7 @@
 <script>
   import ImgineImage from './imgine-image.vue'
   import mixin from './imine.mixin'
+  import './imgine-container.module.css'
 
   export default {
     name: 'ImgineContainer',
@@ -63,25 +64,3 @@
     }
   }
 </script>
-
-<style lang="scss" module>
-  .container {
-    position: relative;
-    &:before {
-      content: '';
-      display: block;
-      padding-bottom: var(--image-aspect);
-    }
-  }
-  .placeholder {
-    z-index: 2;
-  }
-  .image,
-  .placeholder {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-  }
-</style>

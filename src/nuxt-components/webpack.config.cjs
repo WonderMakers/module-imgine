@@ -21,26 +21,13 @@ module.exports = {
         loader: 'vue-loader'
       },
       {
-        test: /\.scss$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-          // {
-          //   loader: 'css-loader',
-          //   options: {
-          //     modules: true,
-          //     localIdentName: '[hash:base64:8]'
-          //   }
-          // },
-          'sass-loader'
-        ]
+        test: /\.css$/i,
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
       }
     ]
   },
   plugins: [
     new VueLoaderPlugin(),
-    new MiniCssExtractPlugin({
-      // filename: 'imgine.css'
-    })
+    new MiniCssExtractPlugin()
   ]
 }
